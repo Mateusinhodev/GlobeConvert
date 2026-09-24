@@ -1,9 +1,13 @@
+import styles from "./Navbar.module.css";
+
 function Navbar() {
   return (
-    <nav>
-      <h2>🌎 GlobeConvert</h2>
+    <nav className={styles.navbar}>
+      <div className={styles.inner}>
+        <h2 className={styles.logo}>🌎 GlobeConvert</h2>
+      </div>
     </nav>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;

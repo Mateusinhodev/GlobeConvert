@@ -1,8 +1,13 @@
+import styles from "./WorldMap.module.css";
+
 function WorldMap() {
   return (
-    <section>
-      <h2>🌍 Mapa Mundial Interativo</h2>
-      <p>Funcionando!</p>
+    <section className={styles.worldMap}>
+      <h2 className={styles.title}>🌍 Mapa Mundial Interativo</h2>
+
+      <div className={styles.placeholder}>
+        <p>Funcionando!</p>
+      </div>
     </section>
   );
 }

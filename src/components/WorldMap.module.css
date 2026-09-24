@@ -1,0 +1,22 @@
+.worldMap {
+  padding: clamp(32px, 6vw, 50px) var(--space-md);
+  text-align: center;
+}
+
+.title {
+  margin: 0 0 var(--space-md);
+}
+
+.placeholder {
+  max-width: 900px;
+  margin-inline: auto;
+  padding: clamp(30px, 8vw, 60px);
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  border: 2px dashed var(--color-accent);
+  border-radius: var(--radius-md);
+}
+
+.placeholder p {
+  margin: 0;
+}
