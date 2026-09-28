@@ -31,6 +31,8 @@ function CurrencySelect({ value, onChange, label }: CurrencySelectProps) {
   const buscaRef = useRef("");
   const buscaTimeout = useRef<number | undefined>(undefined);
   const listboxId = useId();
+  const labelId = useId();
+  const triggerRef = useRef<HTMLButtonElement>(null);
 
   const indiceSelecionado = Math.max(
     0,
@@ -138,71 +140,84 @@ function CurrencySelect({ value, onChange, label }: CurrencySelectProps) {
 
   return (
     <div className={styles.container} ref={containerRef}>
-      <button
-        type="button"
-        className={styles.trigger}
-        role="combobox"
-        aria-label={label}
-        aria-haspopup="listbox"
-        aria-expanded={aberto}
-        aria-controls={listboxId}
-        aria-activedescendant={
-          aberto ? idOpcao(moedas[ativo].codigo) : undefined
-        }
-        onClick={() => (aberto ? setAberto(false) : abrir())}
-        onKeyDown={aoPressionarTecla}
+      {/* Clicar no rótulo foca o campo, como em um <label> comum */}
+      <span
+        id={labelId}
+        className={styles.fieldLabel}
+        onClick={() => triggerRef.current?.focus()}
       >
-        <Bandeira codigo={selecionada.codigo} />
-        <span className={styles.label}>
-          <strong>{selecionada.codigo}</strong> - {selecionada.nome}
-        </span>
-        <svg
-          className={styles.chevron}
-          width="16"
-          height="16"
-          viewBox="0 0 16 16"
-          aria-hidden="true"
-        >
-          <path
-            d="M4 6l4 4 4-4"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </button>
+        {label}
+      </span>
 
-      {aberto && (
-        <ul
-          className={styles.list}
-          id={listboxId}
-          role="listbox"
-          aria-label={label}
-          ref={listaRef}
+      <div className={styles.control}>
+        <button
+          ref={triggerRef}
+          type="button"
+          className={styles.trigger}
+          role="combobox"
+          aria-labelledby={labelId}
+          aria-haspopup="listbox"
+          aria-expanded={aberto}
+          aria-controls={listboxId}
+          aria-activedescendant={
+            aberto ? idOpcao(moedas[ativo].codigo) : undefined
+          }
+          onClick={() => (aberto ? setAberto(false) : abrir())}
+          onKeyDown={aoPressionarTecla}
         >
-          {moedas.map((moeda, indice) => (
-            <li
-              key={moeda.codigo}
-              id={idOpcao(moeda.codigo)}
-              role="option"
-              aria-selected={moeda.codigo === value}
-              className={`${styles.option} ${
-                indice === ativo ? styles.optionActive : ""
-              }`}
-              // Evita que o botão perca o foco ao clicar na opção
-              onMouseDown={(e) => e.preventDefault()}
-              onMouseEnter={() => setAtivo(indice)}
-              onClick={() => selecionar(indice)}
-            >
-              <Bandeira codigo={moeda.codigo} />
-              <span className={styles.code}>{moeda.codigo}</span>
-              <span className={styles.name}>{moeda.nome}</span>
-            </li>
-          ))}
-        </ul>
-      )}
+          <Bandeira codigo={selecionada.codigo} />
+          <span className={styles.triggerText}>
+            <strong>{selecionada.codigo}</strong>{" "}
+            <span className={styles.triggerName}>- {selecionada.nome}</span>
+          </span>
+          <svg
+            className={styles.chevron}
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            aria-hidden="true"
+          >
+            <path
+              d="M4 6l4 4 4-4"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </button>
+
+        {aberto && (
+          <ul
+            className={styles.list}
+            id={listboxId}
+            role="listbox"
+            aria-labelledby={labelId}
+            ref={listaRef}
+          >
+            {moedas.map((moeda, indice) => (
+              <li
+                key={moeda.codigo}
+                id={idOpcao(moeda.codigo)}
+                role="option"
+                aria-selected={moeda.codigo === value}
+                className={`${styles.option} ${
+                  indice === ativo ? styles.optionActive : ""
+                }`}
+                // Evita que o botão perca o foco ao clicar na opção
+                onMouseDown={(e) => e.preventDefault()}
+                onMouseEnter={() => setAtivo(indice)}
+                onClick={() => selecionar(indice)}
+              >
+                <Bandeira codigo={moeda.codigo} />
+                <span className={styles.code}>{moeda.codigo}</span>
+                <span className={styles.name}>{moeda.nome}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   );
 }
