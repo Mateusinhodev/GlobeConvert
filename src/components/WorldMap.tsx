@@ -4,7 +4,7 @@ import { feature } from "topojson-client";
 import type { GeometryCollection, Topology } from "topojson-specification";
 import mapaUrl from "world-atlas/countries-110m.json?url";
 import { getRates } from "../services/exchangeApi";
-import { getCountries, type InfoPais } from "../services/countriesApi";
+import { getCountries, type InfoPais } from "../services/countries";
 import { atalhos, curiosidadesPorMoeda } from "../data/paises";
 import SectionHeader from "./SectionHeader";
 import styles from "./WorldMap.module.css";
@@ -119,9 +119,6 @@ const formatarReal = (valor: number) =>
     minimumFractionDigits: 2,
     maximumFractionDigits: 4,
   }).format(valor);
-
-const formatarPopulacao = (valor: number) =>
-  new Intl.NumberFormat("pt-BR").format(valor);
 
 function WorldMap() {
   const [mapa, setMapa] = useState<DadosMapa | null>(null);
@@ -366,7 +363,7 @@ function WorldMap() {
                   {!paises && !erroPaises
                     ? "Carregando informações..."
                     : erroPaises
-                      ? "Não foi possível carregar os dados dos países. Tente novamente mais tarde."
+                      ? "Não foi possível carregar os dados dos países. Recarregue a página e tente de novo."
                       : `Não há informações disponíveis para ${nomeDoPais(selecionado) || "este território"}.`}
                 </p>
               </div>
@@ -398,10 +395,6 @@ function WorldMap() {
                   <div className={styles.fact}>
                     <dt>Região</dt>
                     <dd>{infoSelecionado.regiao}</dd>
-                  </div>
-                  <div className={`${styles.fact} ${styles.factWide}`}>
-                    <dt>População</dt>
-                    <dd>{formatarPopulacao(infoSelecionado.populacao)} habitantes</dd>
                   </div>
                   <div className={`${styles.fact} ${styles.factWide}`}>
                     <dt>Cotação</dt>

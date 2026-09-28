@@ -30,8 +30,8 @@ const colunas: { titulo: string; links: LinkRodape[] }[] = [
         externo: true,
       },
       {
-        rotulo: "Países: REST Countries",
-        href: "https://restcountries.com",
+        rotulo: "Países: mledoze/countries",
+        href: "https://github.com/mledoze/countries",
         externo: true,
       },
       {
