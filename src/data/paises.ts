@@ -22,7 +22,6 @@ export const curiosidadesPorMoeda: Record<string, string> = {
   EUR: "O euro circula em mais de 20 países da União Europeia e é a segunda moeda mais usada nas reservas internacionais.",
   LYD: "O dinar líbio é a moeda oficial da Líbia e é dividido em 1.000 dirhams.",
   DZD: "O dinar argelino é a moeda oficial da Argélia e é dividido em 100 cêntimos.",
-  XOF: "O franco CFA da África Ocidental é compartilhado por 8 países, incluindo Mali, e possui seu valor vinculado ao euro.",
   MRU: "A ouguiya mauritana possui uma característica curiosa: é dividida em 5 khoums, uma subdivisão pouco comum entre as moedas atuais.",
   ZWG: "O Zimbabwe Gold (ZiG) foi lançado em 2024 e é uma moeda do Zimbábue respaldada por reservas de ouro e outras moedas estrangeiras.",
   SDG: "A libra sudanesa é a moeda oficial do Sudão e foi introduzida em 2007, substituindo o dinar sudanês.",
